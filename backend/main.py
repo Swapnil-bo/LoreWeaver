@@ -56,6 +56,37 @@ app.add_middleware(
 )
 
 
+@app.post("/api/create_session")
+async def create_session_endpoint():
+    import time, uuid, json as _json
+    from models.alignment import WorldAlignment
+    from models.session import GameSession, SceneState
+    from multiplayer.session_manager import set_session
+
+    with open("../seed_world.json", encoding="utf-8") as f:
+        seed = _json.load(f)
+
+    region = seed["regions"][0]
+    session_id = str(uuid.uuid4())[:8]
+
+    session = GameSession(
+        session_id=session_id,
+        players={},
+        world_state=WorldAlignment(),
+        current_scene=SceneState(
+            scene_id=f"scene_{session_id}",
+            region_id=region["region_id"],
+            description=region["description"],
+            active_npcs=region.get("npcs", []),
+        ),
+        turn_order=[],
+        party_leader="",
+        created_at=time.time(),
+    )
+    set_session(session_id, session)
+    return {"session_id": session_id, "region": region["name"]}
+
+
 @app.websocket("/ws")
 async def websocket_endpoint(ws: WebSocket, token: str | None = None):
     await ws.accept()
