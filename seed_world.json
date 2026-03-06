@@ -1,0 +1,118 @@
+{
+  "regions": [
+    {
+      "region_id": "ironhold",
+      "name": "Ironhold",
+      "description": "A fortress city of grey stone and iron gates. Law is absolute here. Soldiers patrol every corner, and informants lurk in every tavern.",
+      "base_mood": "oppressive",
+      "connections": ["ashenvale", "stormgate"],
+      "npcs": ["captain_varek", "theron"],
+      "danger_level": 3,
+      "map_position": {"x": 150, "y": 200},
+      "alignment_modifiers": {"order_bias": 20, "harmony_bias": -10}
+    },
+    {
+      "region_id": "ashenvale",
+      "name": "Ashenvale",
+      "description": "Ancient forest with silver-barked trees that hum at night. The druids distrust outsiders but protect all living things with fierce devotion.",
+      "base_mood": "mysterious",
+      "connections": ["ironhold", "whispermarsh"],
+      "npcs": ["sylara"],
+      "danger_level": 5,
+      "map_position": {"x": 400, "y": 150},
+      "alignment_modifiers": {"order_bias": -15, "harmony_bias": 25}
+    },
+    {
+      "region_id": "whispermarsh",
+      "name": "Whispermarsh",
+      "description": "A fog-choked swampland where bandits and outcasts make their home. No law survives here. Even the wildlife seems angry.",
+      "base_mood": "hostile",
+      "connections": ["ashenvale", "dawnreach"],
+      "npcs": ["mags"],
+      "danger_level": 8,
+      "map_position": {"x": 600, "y": 350},
+      "alignment_modifiers": {"order_bias": -30, "harmony_bias": -20}
+    }
+  ],
+  "npcs": [
+    {
+      "npc_id": "captain_varek",
+      "name": "Captain Varek",
+      "role": "guard_captain",
+      "region": "ironhold",
+      "base_disposition": -0.2,
+      "personality_tags": ["rigid", "duty-bound", "secretly-conflicted"],
+      "backstory": "Varek has enforced Ironhold's laws for 20 years. He once let a child thief go free and has regretted his mercy ever since — or so he tells himself.",
+      "alignment_sensitivity": {"order_chaos": 0.8, "harm_harmony": 0.3}
+    },
+    {
+      "npc_id": "sylara",
+      "name": "Sylara",
+      "role": "druid_elder",
+      "region": "ashenvale",
+      "base_disposition": 0.1,
+      "personality_tags": ["wise", "patient", "tests-outsiders"],
+      "backstory": "Sylara has watched three kingdoms rise and fall from her grove. She speaks in riddles not to confuse, but because the truth is always complicated.",
+      "alignment_sensitivity": {"order_chaos": 0.2, "harm_harmony": 0.9}
+    },
+    {
+      "npc_id": "mags",
+      "name": "One-Eye Mags",
+      "role": "bandit_fence",
+      "region": "whispermarsh",
+      "base_disposition": -0.5,
+      "personality_tags": ["cunning", "self-serving", "respects-strength"],
+      "backstory": "Mags runs the only safe house in the Marsh. She'll sell your secrets to anyone with coin — unless you've proven you're worth more alive as an ally.",
+      "alignment_sensitivity": {"order_chaos": -0.5, "harm_harmony": -0.4}
+    },
+    {
+      "npc_id": "theron",
+      "name": "Merchant Theron",
+      "role": "traveling_merchant",
+      "region": "ironhold",
+      "base_disposition": 0.6,
+      "personality_tags": ["jovial", "greedy", "information-broker"],
+      "backstory": "Theron travels all three regions selling 'exotic goods' (mostly stolen). He knows everyone's secrets and sells them for slightly less than they're worth.",
+      "alignment_sensitivity": {"order_chaos": 0.1, "harm_harmony": 0.6}
+    }
+  ],
+  "lore_entries": [
+    {
+      "lore_id": "the_sundering",
+      "title": "The Sundering War",
+      "content": "Three hundred years ago, the Sundering War split the realm into its current factions. Ironhold rose from ashes of the old empire. Ashenvale's druids sealed their borders. Whispermarsh became a refuge for those who refused either side.",
+      "tags": ["history", "factions", "world"]
+    },
+    {
+      "lore_id": "moral_tide",
+      "title": "The Moral Tide",
+      "content": "Old scholars speak of an invisible current that flows through the realm, shaped by the collective will of its people. When enough blood is spilled for order, ravens gather on every rooftop. When mercy wins out, wildflowers push through cobblestones overnight.",
+      "tags": ["lore", "alignment", "world"]
+    }
+  ],
+  "encounter_templates": [
+    {
+      "template_id": "road_ambush",
+      "name": "Bandit Ambush",
+      "regions": ["whispermarsh"],
+      "enemies": [
+        {
+          "enemy_id": "bandit_grunt",
+          "name": "Bandit Grunt",
+          "hp": 18,
+          "max_hp": 18,
+          "ac": 12,
+          "damage_dice": "1d6+2",
+          "behavior": "reckless"
+        }
+      ],
+      "intro": "Three figures step from the shadows, blades drawn.",
+      "alignment_flavor": {
+        "anarchy": "They snarl like wild animals — no coordination, pure hunger.",
+        "tyranny": "They move in practiced formation. Someone has been training them.",
+        "mercy": "One hesitates, meeting your eye with something like shame.",
+        "justice": "They surrender before the fight begins. 'We're starving,' one admits."
+      }
+    }
+  ]
+}
