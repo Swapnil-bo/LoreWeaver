@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+*.pyo
+.claude/
+backend/chroma_db/
+backend/loreweaver.db
+*.db-wal
+*.db-shm
+frontend/dist/
+frontend/node_modules/
+.env
